@@ -1,0 +1,78 @@
+=============================================
+             PROJECT EXPLANATION
+=============================================
+
+PROJECT NAME: Cataract Eye Detection System
+
+---------------------------------------------
+1. EASY ENGLISH EXPLANATION
+---------------------------------------------
+This project helps to detect if a person has a cataract in their eye and determines how severe it is.
+
+How it works:
+1. Upload Input: First, you upload an image of the eye on the website.
+2. Detection (Phase 1): The system analyzes the image patterns using methods called SIFT and GLCM. It checks "Is there a cataract?"
+   - 'Yes' or 'No'.
+3. Classification (Phase 2): If a cataract is found, the system specifically focuses on the eye (crops it). Then, it uses a smart Deep Learning model called "SqueezeNet" to categorize the cataract stage:
+   - Mild
+   - Normal (Moderate)
+   - Severe
+4. Result: The final diagnosis is shown on the screen.
+
+---------------------------------------------
+2. TANGLISH EXPLANATION (Simple Overview)
+---------------------------------------------
+Idhu oru simple Cataract Eye Detection project. Unga kannu la cataract (pura) irukka illaya nu kandupidikka idhu help pannum.
+
+Epdi Work Aagum? (Step-by-Step):
+1. Image Upload: First, namma website la oru eye photo va upload pannanum.
+2. Check Pannum (Detection): Namma system andha image oda texture a analyze pannum. Idhuku SIFT matrum GLCM nu rendu technical methods use panrom.
+   - Adhu check pannitu "Cataract Iruku" illana "Illai" nu sollum.
+3. Type Kandupidikkum (Classification): Oru vela cataract irundha, adhu endha stage la iruku nu paakum.
+   - Idhukaga "SqueezeNet" nu oru Deep Learning model use panrom.
+   - Adhu "Mild ah iruka?", "Moderate ah?", illana "Romba Severe ah?" nu kandupidichu sollum.
+
+---------------------------------------------
+3. ALGORITHM DEEP EXPLANATION (Virivaana Villakkam) - Tanglish
+---------------------------------------------
+Idhula use panna mukkiyamaana technologies pathi deep-a paapom:
+
+1. SIFT Algorithm (Scale-Invariant Feature Transform):
+   - **Enna Pannum?**: Oru image la irukka mukkiyamaana "Key Points" (Details) a kandu pudikkum.
+   - **Why/Yean use panrom?**: Unga photo zoom pannirkalam, illa konjam saanju irukkalam (rotated). Ipdi irundhalum, SIFT algorithm andha kannu la irukka features a correct a identify pannum. Adhanala detection mistake aagama irukum.
+
+2. GLCM Algorithm (Gray-Level Co-occurrence Matrix):
+   - **Enna Pannum?**: Kannu lens oda "Texture" (Design/Pattern) a check pannum.
+   - **Epdi vela seiyum?**: Ippa cataract irundha, kannu lens konjam clouded-a (mangala) irukum. Normal eye romba clear-a sparkling-a irukum. GLCM pixels a combine panni check pannum. "Idhu Soft ah iruka? Rough ah iruka?" nu paathu values calculate pannum.
+   - Indha values vechu dhan "Cataract iruka illaya" nu first mudivu panrom.
+
+3. SqueezeNet (Convolutional Neural Network - CNN):
+   - **Idhu enna?**: Idhu oru Deep Learning Model. Namma brain epdi vela seiyutho adhe madhiri (Artificial Brain).
+   - **Training**: Idhukitta namma aayirakanakaana (thousands of) Cataract photos kaatraom. "Idhu Mild", "Idhu Severe" nu solli solli train panni irukom.
+   - **Actual Working**: Neenga pudhu photo upload pannum bodhu, andha photo pixels a analyze panni, adhu munnadi padicha patterns kooda compare pannum.
+   - **Specialty**: Matha models (VGG16 madhiri) romba perusa irukum (500MB+ storage theva). Aana SqueezeNet romba chinna size (5MB), aana accurate-a result tharum. Adhanala website romba fast-a load aagum.
+
+4. Hough Circle Transform (Image Processing):
+   - **Use**: Kannu photo la "Karu Vizhi" (Iris/Pupil) enga iruku nu thedi, correct-a andha circle a mattum vettiyedu (crop) panna idhu use aagum. Background la iruka theva illadha vishayangal (eyelashes, skin) remove aagirum.
+
+---------------------------------------------
+4. FILE STRUCTURE (Folder la enna iruku?)
+---------------------------------------------
+
+Main Folder:
+|-- requirements.txt       -> Project run panna thevaiyana software names idhula irukum.
+|
+|-- GUI/ (Main Application Folder)
+    |-- app.py             -> Idhu dhan Main Backend Code. Project run aaga idhu dhan karanam.
+    |-- squeezenet.h5      -> Idhu dhan Namma Model (Brain). Cataract classification ku use aagum.
+    |-- log_model.sav      -> Idhu First step detection model (Cataract Yes/No).
+    |-- templates/         -> Idhula HTML files (Design) irukum.
+        |-- home.html      -> Welcome page.
+        |-- main.html      -> Image upload pandra page.
+        |-- result.html    -> Result katra page.
+
+---------------------------------------------
+COMMAND TO RUN THE PROJECT
+---------------------------------------------
+Terminal la idha type pannunga:
+.\env\Scripts\activate; cd GUI; python app.py

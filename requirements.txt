@@ -1,0 +1,10 @@
+flask
+opencv-python
+opencv-contrib-python
+scikit-image
+scikit-learn
+numpy
+keras
+tensorflow
+h5py
+werkzeug

@@ -1,0 +1,86 @@
+ens <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel='icon' href='#' type='image/x-icon'>
+    <title>Cataract Eye Detection</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md fixed-top main-navbar">
+        <div class="container">
+            <a class="navbar-brand nav-style" href="{{ url_for('hello') }}">
+                <i class="fa fa-eye mr-2"></i>CataractDetect
+            </a>
+            <div class="collapse navbar-collapse" id="Navbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('hello') }}">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-section container">
+        <div class="row">
+            <div class="col-lg-6 mb-4 animate-fade">
+                <div class="glass-card">
+                    <h3 class="label-text">Step 1: Upload Image</h3>
+                    <p class="text-secondary mb-4">Please upload a clear, high-resolution front-view image of the eye
+                        for analysis.</p>
+                    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                        <div class="upload-container">
+                            <i class="fa fa-cloud-upload fa-3x mb-3 text-primary"></i>
+                            <label for="img" class="custom-file-upload">Choose File</label>
+                            <input type="file" id="img" name='file' style="display: none;"
+                                onchange="updateFileName(this)">
+                            <span id="file-name" class="text-muted small">No file chosen</span>
+                        </div>
+                        <input class="btn btn-primary btn-block mt-4" id="submit" type="submit"
+                            value="Upload & Preview">
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4 animate-fade" style="animation-delay: 0.2s;">
+                <div class="glass-card text-center">
+                    <h3 class="label-text">Step 2: Analysis</h3>
+                    {% if user_image %}
+                    <div class="mb-4">
+                        <img class="input-image" src="{{ url_for('static', filename='inputimages/' + user_image) }}"
+                            alt="Pre-analysis Preview">
+                    </div>
+                    <form action="{{ url_for('prediction', file=user_image) }}" method="post">
+                        <button class="btn btn-primary btn-lg" id="submit" type="submit">
+                            <i class="fa fa-magic mr-2"></i>Run Diagnosis
+                        </button>
+                    </form>
+                    {% else %}
+                    <div class="upload-container" style="min-height: 300px;">
+                        <i class="fa fa-image fa-4x mb-3 text-muted"></i>
+                        <p class="text-muted">Analysis will be available after upload</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            var fileName = input.files[0].name;
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
+</body>
+
+</html>
